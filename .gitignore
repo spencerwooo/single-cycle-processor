@@ -1,6 +1,4 @@
-project_led_exp.cache
-project_led_exp.hw
-project_led_exp.ioplanning
-project_led_exp.ip_user_files
-project_led_exp.runs
-project_led_exp.sim
+single-cycle-cpu.cache
+single-cycle-cpu.hw
+single-cycle-cpu.ip_user_files
+single-cycle-cpu.sim
