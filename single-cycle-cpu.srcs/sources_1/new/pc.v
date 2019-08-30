@@ -7,6 +7,7 @@ module pc(
            input wire       clk,
            input wire       rst,
            input wire[31:0] npc_addr,
+
            output reg[31:0] pc_addr
        );
 
