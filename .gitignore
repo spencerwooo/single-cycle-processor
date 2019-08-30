@@ -2,3 +2,4 @@ single-cycle-cpu.cache
 single-cycle-cpu.hw
 single-cycle-cpu.ip_user_files
 single-cycle-cpu.sim
+single-cycle-cpu.runs
