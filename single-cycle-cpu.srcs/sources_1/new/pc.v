@@ -1,26 +1,21 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2019/08/27 19:26:55
-// Design Name: 
-// Module Name: pc
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
+/* Module: Program counter
+ */
 
 module pc(
+           input wire       clk,
+           input wire       rst,
+           input wire[31:0] npc_addr,
+           output reg[31:0] pc_addr
+       );
 
-    );
+always @(posedge rst or posedge clk) begin
+    if (rst) begin
+        pc_addr <= 32'h00000000;
+    end
+    else begin
+        pc_addr <= npc_addr;
+    end
+end
 endmodule
