@@ -5,12 +5,11 @@
  */
 
 module instruction_memory(
-           input wire[11:2]  pc_addr,
+           input wire[11:2]  pc,
 
            output wire[31:0] instruction
        );
 
 reg[31:0] im[`IM_LENGTH:0];
-assign instruction = im[pc_addr];
-
+assign instruction = im[pc];
 endmodule
