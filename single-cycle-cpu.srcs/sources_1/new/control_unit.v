@@ -16,7 +16,7 @@ module control_unit(
            output wire                       reg_write
        );
 
-wire type_r, add, sub;
+wire type_r, add, subu;
 
 // Whether instruction is R-Type
 assign type_r    = (opcode == `INST_R_TYPE)       ? 1 : 0;
@@ -27,7 +27,7 @@ assign subu      = (type_r && func == `FUNC_SUBU) ? 1 : 0;
 
 // Determine ALUOp signal
 assign alu_op    = add ? `ALU_OP_ADD :
-       sub ? `ALU_OP_SUB : `ALU_OP_DEFAULT;
+       subu ? `ALU_OP_SUB : `ALU_OP_DEFAULT;
 // Determine RegWrite signal
 assign reg_write = (type_r || add || subu) ? 1 : 0;
 endmodule
