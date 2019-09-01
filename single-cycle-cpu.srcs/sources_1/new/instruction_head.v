@@ -28,5 +28,3 @@
 `define ALU_OP_ADD     3'b001    // ALUOp ADD
 `define ALU_OP_SUB     3'b010    // ALUOp SUB
 `define ALU_OP_DEFAULT 3'b111    // ALUOp default value
-
-//

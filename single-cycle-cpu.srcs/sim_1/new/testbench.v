@@ -19,8 +19,7 @@ initial begin
     clk = 0;
 
     #30 rst = 0;
-    $display("%h", ZAN_TOP.ZAN_REG_FILE.gpr[9]);
-    $display("%h", ZAN_TOP.ZAN_REG_FILE.gpr[10]);
+    $display("%h + %h", ZAN_TOP.ZAN_REG_FILE.gpr[9], ZAN_TOP.ZAN_REG_FILE.gpr[10]);
     #80 $display("%h", ZAN_TOP.ZAN_REG_FILE.gpr[11]);
     #20 $stop;
 end

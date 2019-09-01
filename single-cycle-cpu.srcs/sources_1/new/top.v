@@ -29,6 +29,10 @@ wire[4:0] rt;
 wire[4:0] rd;
 wire[4:0] sa;
 
+// Decode 16 bit and 26 bit immediates
+wire[15:0] imm16;
+wire[25:0] imm26;
+
 // Assign decoded instruction to variables
 assign opcode = instruction[31:26];
 assign func   = instruction[5:0];
