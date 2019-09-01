@@ -6,13 +6,18 @@
 
 module top(
            input  wire       clk,
-           input  wire       rst,
-           input  wire[31:0] instruction,
+           input  wire       rst
+           //    input  wire[31:0] instruction,
 
-           output wire[31:0] pc,
-           output wire[31:0] wout_addr,
-           output wire[31:0] wout_data
+           //    output wire[31:0] pc,
+           //    output wire[31:0] wout_addr,
+           //    output wire[31:0] wout_data
        );
+
+// Instruction fetch module i/o
+wire[31:0] pc;
+wire[31:0] npc;
+wire[31:0] instruction;
 
 // Decode instruction type and function
 wire[5:0] opcode;
@@ -24,6 +29,7 @@ wire[4:0] rt;
 wire[4:0] rd;
 wire[4:0] sa;
 
+// Assign decoded instruction to variables
 assign opcode = instruction[31:26];
 assign func   = instruction[5:0];
 assign rs     = instruction[25:21];
@@ -33,10 +39,10 @@ assign sa     = instruction[10:6];
 
 wire[31:0] reg1_data;
 wire[31:0] reg2_data;
-assign wout_data = reg2_data;
+// assign wout_data = reg2_data;
 
 wire[31:0] alu_result;
-assign wout_addr = alu_result;
+// assign wout_addr = alu_result;
 
 // Write register control signal
 wire reg_write;
@@ -45,12 +51,47 @@ wire[`ALU_OP_LENGTH - 1:0] alu_op;
 // ALU zero control signal
 wire zero;
 
-// Instantiate modules
-pc ZAN_PC(.clk(clk), .rst(rst), .npc(npc), .pc(pc));
-npc ZAN_NPC(.pc(pc), .npc(npc));
+/*
+ * Instantiate modules
+ */
 
-instruction_memory ZAN_INSTR_MEM(.pc(pc), .instruction(instruction));
-control_unit ZAN_CU(.opcode(opcode), .sa(sa), .func(func), .zero(zero), .alu_op(alu_op), .reg_write(reg_write));
-register_file ZAN_REG_FILE(.clk(clk), .reg_write(reg_write), .read_reg1_addr(rs), .read_reg2_addr(rt), .write_reg_addr(rd), .write_data(alu_result), .reg1_data(reg1_data), .reg2_data(reg2_data));
-alu ZAN_ALU(.alu_op(alu_op), .alu_input1(reg1_data), .alu_input2(reg2_data), .sa(sa), .alu_result(alu_result), .zero(zero));
+// Instruction fetch modules: PC, NPC and Instruction_Memory
+pc ZAN_PC(.clk(clk),
+          .rst(rst),
+          .npc(npc),
+          .pc(pc));
+
+npc ZAN_NPC(.pc(pc),
+            .npc(npc));
+
+instruction_memory ZAN_INSTR_MEM(.pc_addr(pc[11:2]),
+                                 .instruction(instruction));
+
+// Module: Control Unit
+control_unit ZAN_CU(.clk(clk),
+                    .rst(rst),
+                    .opcode(opcode),
+                    .sa(sa),
+                    .func(func),
+                    .zero(zero),
+                    .alu_op(alu_op),
+                    .reg_write(reg_write));
+
+// Module: Register File
+register_file ZAN_REG_FILE(.clk(clk),
+                           .reg_write(reg_write),
+                           .read_reg1_addr(rs),
+                           .read_reg2_addr(rt),
+                           .write_reg_addr(rd),
+                           .write_data(alu_result),
+                           .reg1_data(reg1_data),
+                           .reg2_data(reg2_data));
+
+// Module: ALU
+alu ZAN_ALU(.alu_op(alu_op),
+            .alu_input1(reg1_data),
+            .alu_input2(reg2_data),
+            .sa(sa),
+            .alu_result(alu_result),
+            .zero(zero));
 endmodule

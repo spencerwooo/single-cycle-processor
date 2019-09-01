@@ -5,6 +5,8 @@
  */
 
 module control_unit(
+           input wire      clk,
+           input wire      rst,
            input wire[5:0] opcode,
            input wire[4:0] sa,
            input wire[5:0] func,
@@ -15,11 +17,17 @@ module control_unit(
        );
 
 wire type_r, add, sub;
+
+// Whether instruction is R-Type
 assign type_r    = (opcode == `INST_R_TYPE)       ? 1 : 0;
+// Whether function is ADD
 assign add       = (type_r && func == `FUNC_ADD)  ? 1 : 0;
+// Whether function is SUB
 assign subu      = (type_r && func == `FUNC_SUBU) ? 1 : 0;
 
+// Determine ALUOp signal
 assign alu_op    = add ? `ALU_OP_ADD :
-                   sub ? `ALU_OP_SUB : `ALU_OP_DEFAULT;
+       sub ? `ALU_OP_SUB : `ALU_OP_DEFAULT;
+// Determine RegWrite signal
 assign reg_write = (type_r || add || subu) ? 1 : 0;
 endmodule

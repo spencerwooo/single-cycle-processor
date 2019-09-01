@@ -12,6 +12,6 @@ module npc(
 
 wire[31:0] next_inst;
 
-assign next_inst = pc + 4;
+assign next_inst = pc + 1'h4;
 assign npc = next_inst;
 endmodule
