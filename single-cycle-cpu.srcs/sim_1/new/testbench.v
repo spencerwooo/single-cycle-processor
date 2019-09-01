@@ -11,9 +11,9 @@ top ZAN_TOP(clk, rst);
 
 initial begin
     // Load instructions
-    $readmemh("..\\..\\..\\single-cycle-cpu.tbcode\\instructions.txt", ZAN_TOP.ZAN_INSTR_MEM.im);
+    $readmemh("../../../single-cycle-cpu.tbcode/instructions.txt", ZAN_TOP.ZAN_INSTR_MEM.im);
     // Load register initial values
-    $readmemh("..\\..\\..\\single-cycle-cpu.tbcode\\register.txt", ZAN_TOP.ZAN_REG_FILE.gpr);
+    $readmemh("../../../single-cycle-cpu.tbcode/register.txt", ZAN_TOP.ZAN_REG_FILE.gpr);
 
     rst = 1;
     clk = 0;
