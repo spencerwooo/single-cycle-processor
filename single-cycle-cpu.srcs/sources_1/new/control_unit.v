@@ -18,7 +18,7 @@ module control_unit(
            output wire                        alu_src,
            output wire                        mem_write,
            output wire[`REG_SRC_LENGTH - 1:0] reg_src,
-           output wire                        ext_op,
+           output wire[`EXT_OP_LENGTH - 1:0]  ext_op,
            output wire                        npc_op
        );
 
@@ -40,9 +40,22 @@ assign beq       = (opcode == `INST_BEQ)          ? 1 : 0;
 // J-Type Instructions
 assign j         = (opcode == `INST_J)            ? 1 : 0;
 
-// Determine ALUOp signal
+// Determine control signals
 assign alu_op    = (add || addiu || lw || sw) ? `ALU_OP_ADD :
        (subu || beq) ? `ALU_OP_SUB : `ALU_OP_DEFAULT;
-// Determine RegWrite signal
-assign reg_write = (type_r || add || subu) ? 1 : 0;
+assign reg_dst   = (add || subu) ? 1 : 0;
+assign reg_write = (lui || type_r || add || subu || addiu || lw) ? 1 : 0;
+assign alu_src   = (addiu || lw || sw) ? 1 : 0;
+assign mem_write = (sw) ? 1 : 0;
+assign reg_src   = (lui) ? `REG_SRC_IMM :
+       (addiu || add || subu) ? `REG_SRC_ALU :
+       (lw) ? `REG_SRC_MEM : `REG_SRC_DEFAULT;
+assign ext_op    = (lui) ? `EXT_OP_SFT16 :
+       (addiu) ? `EXT_OP_SIGNED :
+       (lw || sw) ? `EXT_OP_UNSIGNED :
+       `EXT_OP_DEFAULT;
+assign npc_op    = (lui || addiu || add || subu || lw || sw) ? `NPC_OP_NEXT :
+       (beq && !zero) ? `NPC_OP_NEXT :
+       (beq && zero) ? `NPC_OP_OFFSET :
+       (j) ? `NPC_OP_JUMP : `NPC_OP_DEFAULT;
 endmodule
