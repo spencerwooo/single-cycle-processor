@@ -5,7 +5,6 @@
  */
 
 module npc(
-           input wire                       clk,
            input wire[`NPC_OP_LENGTH - 1:0] npc_op, // NPCOp control signal
 
            input wire[31:0]                 pc,     // Program counter
@@ -18,7 +17,7 @@ module npc(
 wire[31:0] pc_4;
 assign pc_4 = pc + 32'h4;
 
-always @ (posedge clk) begin
+always @ (*) begin
     case (npc_op)
         `NPC_OP_NEXT:
             npc <= pc_4;                                       // Basic next instruction: no jump

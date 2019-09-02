@@ -77,8 +77,7 @@ pc ZAN_PC(.clk(clk),
           .npc(npc),
           .pc(pc));
 
-npc ZAN_NPC(.clk(clk),
-            .npc_op(npc_op),
+npc ZAN_NPC(.npc_op(npc_op),
             .pc(pc),
             .imm16(imm16),
             .imm26(imm26),
@@ -88,9 +87,7 @@ instruction_memory ZAN_INSTR_MEM(.pc_addr(pc[11:2]),
                                  .instruction(instruction));
 
 // Module: Control Unit
-control_unit ZAN_CU(.clk(clk),
-                    .rst(rst),
-                    .opcode(opcode),
+control_unit ZAN_CU(.opcode(opcode),
                     .sa(sa),
                     .func(func),
                     .zero(zero),

@@ -5,8 +5,6 @@
  */
 
 module control_unit(
-           input wire      clk,
-           input wire      rst,
            input wire[5:0] opcode,
            input wire[4:0] sa,
            input wire[5:0] func,
