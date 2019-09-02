@@ -27,9 +27,9 @@
 
 // ALU Control Signals
 `define ALU_OP_LENGTH   3          // Bits of signal ALUOp
+`define ALU_OP_DEFAULT  3'b000     // ALUOp default value
 `define ALU_OP_ADD      3'b001     // ALUOp ADD
 `define ALU_OP_SUB      3'b010     // ALUOp SUB
-`define ALU_OP_DEFAULT  3'b111     // ALUOp default value
 
 // RegDst Control Signals
 `define REG_DST_RT      1'b0       // Register write destination: rt
@@ -41,21 +41,21 @@
 
 // RegSrc Control Signals
 `define REG_SRC_LENGTH  2          // Bits of signal RegSrc
-`define REG_SRC_ALU     2'b00      // Register write source: ALU
-`define REG_SRC_MEM     2'b01      // Register write source: Data Memory
-`define REG_SRC_IMM     2'b10      // Register write source: Extended immediate
-`define REG_SRC_DEFAULT 2'b11      // Register default value
+`define REG_SRC_DEFAULT 2'b00      // Register default value
+`define REG_SRC_ALU     2'b01      // Register write source: ALU
+`define REG_SRC_MEM     2'b10      // Register write source: Data Memory
+`define REG_SRC_IMM     2'b11      // Register write source: Extended immediate
 
 // ExtOp Control Signals
 `define EXT_OP_LENGTH   2          // Bits of Signal ExtOp
-`define EXT_OP_SFT16    2'b00      // LUI: Shift Left 16
-`define EXT_OP_SIGNED   2'b01      // ADDIU: `imm16` signed extended to 32 bit
-`define EXT_OP_UNSIGNED 2'b10      // LW, SW: `imm16` unsigned extended to 32 bit
-`define EXT_OP_DEFAULT  2'b11      // ExtOp default value
+`define EXT_OP_DEFAULT  2'b00      // ExtOp default value
+`define EXT_OP_SFT16    2'b01      // LUI: Shift Left 16
+`define EXT_OP_SIGNED   2'b10      // ADDIU: `imm16` signed extended to 32 bit
+`define EXT_OP_UNSIGNED 2'b11      // LW, SW: `imm16` unsigned extended to 32 bit
 
 // NPCOp Control Signals
 `define NPC_OP_LENGTH   3          // Bits of NPCOp
-`define NPC_OP_NEXT     3'b000     // Next instruction: normal
-`define NPC_OP_JUMP     3'b001     // Next instruction: J
-`define NPC_OP_OFFSET   3'b010     // Next instruction: BEQ
-`define NPC_OP_DEFAULT  3'b111     // NPCOp default value
+`define NPC_OP_DEFAULT  3'b000     // NPCOp default value
+`define NPC_OP_NEXT     3'b001     // Next instruction: normal
+`define NPC_OP_JUMP     3'b010     // Next instruction: J
+`define NPC_OP_OFFSET   3'b011     // Next instruction: BEQ
