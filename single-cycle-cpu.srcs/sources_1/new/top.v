@@ -111,21 +111,18 @@ data_memory ZAN_DATA_MEM(.clk(clk),
                          .read_mem_data(read_mem_data));
 
 // Mux: RegDst
-mux_reg_dst ZAN_MUX_REGDST(.clk(clk),
-                           .reg_dst(reg_dst),
+mux_reg_dst ZAN_MUX_REGDST(.reg_dst(reg_dst),
                            .mux_in_0(rt),
                            .mux_in_1(rd),
                            .mux_out(reg_dst_out));
 
-mux_reg_src ZAN_MUX_REGSRC(.clk(clk),
-                           .reg_src(reg_src),
+mux_reg_src ZAN_MUX_REGSRC(.reg_src(reg_src),
                            .mux_in_0(alu_result),
                            .mux_in_1(read_mem_data),
                            .mux_in_2(ext_out),
                            .mux_out(reg_src_out));
 
-mux_alu_src ZAN_MUX_ALUSRC(.clk(clk),
-                           .alu_src(alu_src),
+mux_alu_src ZAN_MUX_ALUSRC(.alu_src(alu_src),
                            .mux_in_0(reg2_data),
                            .mux_in_1(ext_out),
                            .mux_out(alu_src_out));
@@ -148,8 +145,7 @@ alu ZAN_ALU(.alu_op(alu_op),
             .alu_result(alu_result),
             .zero(zero));
 
-extend ZAN_EXTEND(.clk(clk),
-                  .imm16(imm16),
+extend ZAN_EXTEND(.imm16(imm16),
                   .ext_op(ext_op),
                   .ext_out(ext_out));
 endmodule

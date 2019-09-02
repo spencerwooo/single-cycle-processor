@@ -5,14 +5,13 @@
  */
 
 module extend(
-           input wire                       clk,
            input wire[15:0]                 imm16,     // 16 bit immediate
            input wire[`EXT_OP_LENGTH - 1:0] ext_op,    // ExtOp control signal
 
            output reg[31:0]                 ext_out    // Extend module output
        );
 
-always @ (posedge clk) begin
+always @ (*) begin
     case (ext_op)
         `EXT_OP_SFT16:
             ext_out <= {imm16, 16'b0};                 // LUI: 16 digit shift left

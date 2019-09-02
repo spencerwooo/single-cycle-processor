@@ -12,7 +12,7 @@ module pc(
            output reg[31:0] pc
        );
 
-always @(posedge clk) begin
+always @ (posedge clk) begin
     if (rst) begin
         pc <= `INITIAL_VAL;
     end
