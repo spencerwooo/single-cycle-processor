@@ -10,14 +10,14 @@ module control_unit(
            input wire[5:0] func,
            input wire      zero, // For instruction BEQ, determining the result of rs-rt
 
-           output wire[`ALU_OP_LENGTH - 1:0]  alu_op,
+           output wire[`ALU_OP_LENGTH  - 1:0] alu_op,
            output wire                        reg_dst,
            output wire                        reg_write,
            output wire                        alu_src,
            output wire                        mem_write,
            output wire[`REG_SRC_LENGTH - 1:0] reg_src,
-           output wire[`EXT_OP_LENGTH - 1:0]  ext_op,
-           output wire                        npc_op
+           output wire[`EXT_OP_LENGTH  - 1:0] ext_op,
+           output wire[`NPC_OP_LENGTH  - 1:0] npc_op
        );
 
 wire type_r, lui, addiu, add, subu, lw, sw, beq, j;

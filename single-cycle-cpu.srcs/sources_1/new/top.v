@@ -64,7 +64,7 @@ wire                        alu_src;
 wire                        mem_write;
 wire[`REG_SRC_LENGTH - 1:0] reg_src;
 wire[`EXT_OP_LENGTH - 1:0]  ext_op;
-wire                        npc_op;
+wire[`NPC_OP_LENGTH  - 1:0] npc_op;
 wire                        zero;
 
 /*
