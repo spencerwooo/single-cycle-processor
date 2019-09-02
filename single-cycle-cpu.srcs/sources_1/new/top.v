@@ -15,14 +15,14 @@ wire[31:0] npc;
 wire[31:0] instruction;
 
 // Decode instruction type and function
-wire[5:0] opcode;
-wire[5:0] func;
+wire[5:0]  opcode;
+wire[5:0]  func;
 
 // Decode registers
-wire[4:0] rs;
-wire[4:0] rt;
-wire[4:0] rd;
-wire[4:0] sa;
+wire[4:0]  rs;
+wire[4:0]  rt;
+wire[4:0]  rd;
+wire[4:0]  sa;
 
 // Decode 16 bit and 26 bit immediates
 wire[15:0] imm16;
@@ -100,14 +100,14 @@ control_unit ZAN_CU(.opcode(opcode),
                     .ext_op(ext_op),
                     .npc_op(npc_op));
 
-// Data Memory
+// Module: Data Memory
 data_memory ZAN_DATA_MEM(.clk(clk),
                          .mem_write(mem_write),
                          .mem_addr(alu_result[11:2]),
                          .write_mem_data(reg2_data),
                          .read_mem_data(read_mem_data));
 
-// Mux: RegDst
+// Module: Multiplexers
 mux_reg_dst ZAN_MUX_REGDST(.reg_dst(reg_dst),
                            .mux_in_0(rt),
                            .mux_in_1(rd),
@@ -142,6 +142,7 @@ alu ZAN_ALU(.alu_op(alu_op),
             .alu_result(alu_result),
             .zero(zero));
 
+// Module: extender shifter two-in-one
 extend ZAN_EXTEND(.imm16(imm16),
                   .ext_op(ext_op),
                   .ext_out(ext_out));

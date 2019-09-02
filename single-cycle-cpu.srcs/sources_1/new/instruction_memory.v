@@ -5,6 +5,7 @@
  */
 
 module instruction_memory(
+           // PC address (address for instruction)
            input wire[11:2]  pc_addr,
 
            output wire[31:0] instruction

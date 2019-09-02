@@ -5,11 +5,12 @@
  */
 
 module control_unit(
-           input wire[5:0] opcode,
-           input wire[4:0] sa,
-           input wire[5:0] func,
-           input wire      zero, // For instruction BEQ, determining the result of rs-rt
+           input wire[5:0]                    opcode, // Instruction opcode
+           input wire[4:0]                    sa,     // Shift operation operand
+           input wire[5:0]                    func,   // R-Type instruction function
+           input wire                         zero,   // For instruction BEQ, determining the result of rs - rt
 
+           // Control signals
            output wire[`ALU_OP_LENGTH  - 1:0] alu_op,
            output wire                        reg_dst,
            output wire                        reg_write,
@@ -39,21 +40,30 @@ assign beq       = (opcode == `INST_BEQ)          ? 1 : 0;
 assign j         = (opcode == `INST_J)            ? 1 : 0;
 
 // Determine control signals
-assign alu_op    = (add || addiu || lw || sw) ? `ALU_OP_ADD :
-       (subu || beq) ? `ALU_OP_SUB : `ALU_OP_DEFAULT;
+assign alu_op    = (add || addiu || lw || sw) ? `ALU_OP_ADD : // Addition in ALU
+       (subu || beq) ? `ALU_OP_SUB :                          // Subtraction in ALU
+       `ALU_OP_DEFAULT;                                       // Default ALU operand (output the second ALU input)
+
+// RegDst signal
 assign reg_dst   = (add || subu) ? 1 : 0;
-assign reg_write = (lui || type_r || add || subu || addiu || lw) ? 1 : 0;
+// ALUSrc signal
 assign alu_src   = (addiu || lw || sw) ? 1 : 0;
+
+// Write signals
+assign reg_write = (lui || type_r || add || subu || addiu || lw) ? 1 : 0;
 assign mem_write = (sw) ? 1 : 0;
-assign reg_src   = (lui) ? `REG_SRC_IMM :
-       (addiu || add || subu) ? `REG_SRC_ALU :
-       (lw) ? `REG_SRC_MEM : `REG_SRC_DEFAULT;
-assign ext_op    = (lui) ? `EXT_OP_SFT16 :
-       (addiu) ? `EXT_OP_SIGNED :
-       (lw || sw) ? `EXT_OP_UNSIGNED :
-       `EXT_OP_DEFAULT;
-assign npc_op    = (lui || addiu || add || subu || lw || sw) ? `NPC_OP_NEXT :
-       (beq && !zero) ? `NPC_OP_NEXT :
-       (beq && zero) ? `NPC_OP_OFFSET :
-       (j) ? `NPC_OP_JUMP : `NPC_OP_DEFAULT;
+
+assign reg_src   = (lui) ? `REG_SRC_IMM :                      // Source: Extended immediate
+       (addiu || add || subu) ? `REG_SRC_ALU :                 // Source: ALU result
+       (lw) ? `REG_SRC_MEM : `REG_SRC_DEFAULT;                 // Source: Data memory
+
+assign ext_op    = (lui) ? `EXT_OP_SFT16 :                     // Extend module operation: shift left 16
+       (addiu) ? `EXT_OP_SIGNED :                              // Extend module operation: signed extend
+       (lw || sw) ? `EXT_OP_UNSIGNED :                         // Extend module operation: unsigned extend
+       `EXT_OP_DEFAULT;                                        // Extend module operation: default operation (unsigned extend)
+
+assign npc_op    = (lui || addiu || add || subu || lw || sw) ? `NPC_OP_NEXT : // NPC: normal - next instruction
+       (beq && !zero) ? `NPC_OP_NEXT :                                        // NPC: BEQ - normal - next instruction
+       (beq && zero) ? `NPC_OP_OFFSET :                                       // NPC: BEQ - jump to target
+       (j) ? `NPC_OP_JUMP : `NPC_OP_DEFAULT;                                  // NPC: J - just jump!
 endmodule

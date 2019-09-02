@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 /*
- * Module: testbench
+ * Testbench
  */
 
 module testbench();
@@ -14,7 +14,7 @@ initial begin
     $readmemh("../../../single-cycle-cpu.tbcode/instructions.txt", ZAN_TOP.ZAN_INSTR_MEM.im);
     // Load register initial values
     $readmemh("../../../single-cycle-cpu.tbcode/register.txt", ZAN_TOP.ZAN_REG_FILE.gpr);
-    // Load memory data
+    // Load memory data initial values
     $readmemh("../../../single-cycle-cpu.tbcode/data_memory.txt", ZAN_TOP.ZAN_DATA_MEM.dm);
 
     rst = 1;
