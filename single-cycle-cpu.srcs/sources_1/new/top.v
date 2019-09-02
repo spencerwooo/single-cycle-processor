@@ -7,11 +7,6 @@
 module top(
            input  wire       clk,
            input  wire       rst
-           //    input  wire[31:0] instruction,
-
-           //    output wire[31:0] pc,
-           //    output wire[31:0] wout_addr,
-           //    output wire[31:0] wout_data
        );
 
 // Instruction fetch module i/o
@@ -43,10 +38,8 @@ assign sa     = instruction[10:6];
 
 wire[31:0] reg1_data;
 wire[31:0] reg2_data;
-// assign wout_data = reg2_data;
 
 wire[31:0] alu_result;
-// assign wout_addr = alu_result;
 
 // Write register control signal
 wire reg_write;
@@ -80,6 +73,9 @@ control_unit ZAN_CU(.clk(clk),
                     .zero(zero),
                     .alu_op(alu_op),
                     .reg_write(reg_write));
+
+// Mux: RegDst
+// mux_reg_dst ZAN_MUX_REGDST(.);
 
 // Module: Register File
 register_file ZAN_REG_FILE(.clk(clk),

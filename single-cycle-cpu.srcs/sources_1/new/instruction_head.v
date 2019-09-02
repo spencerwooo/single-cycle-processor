@@ -28,3 +28,9 @@
 `define ALU_OP_ADD     3'b001    // ALUOp ADD
 `define ALU_OP_SUB     3'b010    // ALUOp SUB
 `define ALU_OP_DEFAULT 3'b111    // ALUOp default value
+
+// RegSrc Control Signals
+`define REG_SRC_LENGTH 2          // Bits of signal RegSrc
+`define REG_SRC_ALU    2'b00      // Register write source: ALU
+`define REG_SRC_MEM    2'b01      // Register write source: Data Memory
+`define REG_SRC_IMM    2'b10      // Register write source: Extended immediate
