@@ -60,10 +60,10 @@ endmodule
 module mux_alu_src(
            input wire                              clk,
            input wire                              alu_src,  // mux control signal: ALUSrc
-           input wire[4:0]                         mux_in_0, // mux input source: register file
-           input wire[4:0]                         mux_in_1, // mux input source: immediate num
+           input wire[31:0]                        mux_in_0, // mux input source: register file
+           input wire[31:0]                        mux_in_1, // mux input source: immediate num
 
-           output reg[4:0]                         mux_out   // mux output
+           output reg[31:0]                        mux_out   // mux output
        );
 
 always @ (posedge clk) begin

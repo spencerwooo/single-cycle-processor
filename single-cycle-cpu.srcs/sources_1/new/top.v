@@ -5,8 +5,8 @@
  */
 
 module top(
-           input  wire       clk,
-           input  wire       rst
+           input wire clk,
+           input wire rst
        );
 
 // Instruction fetch module i/o
@@ -35,18 +35,37 @@ assign rs     = instruction[25:21];
 assign rt     = instruction[20:16];
 assign rd     = instruction[15:11];
 assign sa     = instruction[10:6];
+assign imm16  = instruction[15:0];
+assign imm26  = instruction[25:0];
 
+// MUX
+wire[4:0]  reg_dst_out;
+wire[31:0] reg_src_out;
+wire[31:0] alu_src_out;
+
+// Data memory
+wire[31:0] read_mem_data;
+
+// Extend module
+wire[31:0] ext_out;
+
+// Register file
 wire[31:0] reg1_data;
 wire[31:0] reg2_data;
 
+// ALU
 wire[31:0] alu_result;
 
-// Write register control signal
-wire reg_write;
-// ALU operator control signal
-wire[`ALU_OP_LENGTH - 1:0] alu_op;
-// ALU zero control signal
-wire zero;
+// Control signals
+wire[`ALU_OP_LENGTH - 1:0]  alu_op;
+wire                        reg_dst;
+wire                        reg_write;
+wire                        alu_src;
+wire                        mem_write;
+wire[`REG_SRC_LENGTH - 1:0] reg_src;
+wire[`EXT_OP_LENGTH - 1:0]  ext_op;
+wire                        npc_op;
+wire                        zero;
 
 /*
  * Instantiate modules
@@ -58,7 +77,11 @@ pc ZAN_PC(.clk(clk),
           .npc(npc),
           .pc(pc));
 
-npc ZAN_NPC(.pc(pc),
+npc ZAN_NPC(.clk(clk),
+            .npc_op(npc_op),
+            .pc(pc),
+            .imm16(imm16),
+            .imm26(imm26),
             .npc(npc));
 
 instruction_memory ZAN_INSTR_MEM(.pc_addr(pc[11:2]),
@@ -72,26 +95,61 @@ control_unit ZAN_CU(.clk(clk),
                     .func(func),
                     .zero(zero),
                     .alu_op(alu_op),
-                    .reg_write(reg_write));
+                    .reg_write(reg_write),
+                    .reg_dst(reg_dst),
+                    .alu_src(alu_src),
+                    .mem_write(mem_write),
+                    .reg_src(reg_src),
+                    .ext_op(ext_op),
+                    .npc_op(npc_op));
+
+// Data Memory
+data_memory ZAN_DATA_MEM(.clk(clk),
+                         .mem_write(mem_write),
+                         .mem_addr(alu_result[11:2]),
+                         .write_mem_data(reg2_data),
+                         .read_mem_data(read_mem_data));
 
 // Mux: RegDst
-// mux_reg_dst ZAN_MUX_REGDST(.);
+mux_reg_dst ZAN_MUX_REGDST(.clk(clk),
+                           .reg_dst(reg_dst),
+                           .mux_in_0(rt),
+                           .mux_in_1(rd),
+                           .mux_out(reg_dst_out));
+
+mux_reg_src ZAN_MUX_REGSRC(.clk(clk),
+                           .reg_src(reg_src),
+                           .mux_in_0(alu_result),
+                           .mux_in_1(read_mem_data),
+                           .mux_in_2(ext_out),
+                           .mux_out(reg_src_out));
+
+mux_alu_src ZAN_MUX_ALUSRC(.clk(clk),
+                           .alu_src(alu_src),
+                           .mux_in_0(reg2_data),
+                           .mux_in_1(ext_out),
+                           .mux_out(alu_src_out));
 
 // Module: Register File
 register_file ZAN_REG_FILE(.clk(clk),
                            .reg_write(reg_write),
                            .read_reg1_addr(rs),
                            .read_reg2_addr(rt),
-                           .write_reg_addr(rd),
-                           .write_data(alu_result),
+                           .write_reg_addr(reg_dst_out),
+                           .write_data(reg_src_out),
                            .reg1_data(reg1_data),
                            .reg2_data(reg2_data));
 
 // Module: ALU
 alu ZAN_ALU(.alu_op(alu_op),
             .alu_input1(reg1_data),
-            .alu_input2(reg2_data),
+            .alu_input2(alu_src_out),
             .sa(sa),
             .alu_result(alu_result),
             .zero(zero));
+
+extend ZAN_EXTEND(.clk(clk),
+                  .imm16(imm16),
+                  .ext_op(ext_op),
+                  .ext_out(ext_out));
 endmodule
