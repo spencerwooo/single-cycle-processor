@@ -6,7 +6,8 @@
 
 module top(
            input wire clk,
-           input wire rst
+           input wire rst,
+           output wire[7:0] debug_reg_single
        );
 
 // Instruction fetch module i/o
@@ -83,8 +84,13 @@ npc ZAN_NPC(.npc_op(npc_op),
             .imm26(imm26),
             .npc(npc));
 
-instruction_memory ZAN_INSTR_MEM(.pc_addr(pc[11:2]),
-                                 .instruction(instruction));
+// Simulation instruction memory
+// instruction_memory ZAN_INSTR_MEM(.pc_addr(pc[11:2]),
+//                                 .instruction(instruction));
+
+// IP catalog instruction memory
+instruction_memory_ip ZAN_INSTR_MEM_IP (.a(pc[11:2]),       // input wire [9 : 0] a
+                                        .spo(instruction)); // output wire [31 : 0] spo
 
 // Module: Control Unit
 control_unit ZAN_CU(.opcode(opcode),
@@ -100,12 +106,21 @@ control_unit ZAN_CU(.opcode(opcode),
                     .ext_op(ext_op),
                     .npc_op(npc_op));
 
-// Module: Data Memory
-data_memory ZAN_DATA_MEM(.clk(clk),
-                         .mem_write(mem_write),
-                         .mem_addr(alu_result[11:2]),
-                         .write_mem_data(reg2_data),
-                         .read_mem_data(read_mem_data));
+// // Module: Data Memory
+// data_memory ZAN_DATA_MEM(.clk(clk),
+//                          .mem_write(mem_write),
+//                          .mem_addr(alu_result[11:2]),
+//                          .write_mem_data(reg2_data),
+//                          .read_mem_data(read_mem_data));
+
+// IP catalog data memory
+data_memory_ip ZAN_DATA_MEM (
+                   .clk(clk),             // input wire clk
+                   .a(alu_result[11:2]),  // input wire [9 : 0] a
+                   .d(reg2_data),         // input wire [31 : 0] d
+                   .we(mem_write),        // input wire we
+                   .spo(read_mem_data)    // output wire [31 : 0] spo
+               );
 
 // Module: Multiplexers
 mux_reg_dst ZAN_MUX_REGDST(.reg_dst(reg_dst),
@@ -132,7 +147,8 @@ register_file ZAN_REG_FILE(.clk(clk),
                            .write_reg_addr(reg_dst_out),
                            .write_data(reg_src_out),
                            .reg1_data(reg1_data),
-                           .reg2_data(reg2_data));
+                           .reg2_data(reg2_data),
+                           .debug_reg_single(debug_reg_single));
 
 // Module: ALU
 alu ZAN_ALU(.alu_op(alu_op),
