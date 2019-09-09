@@ -1,10 +1,10 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
-// Date        : Mon Sep  9 20:02:24 2019
-// Host        : DESKTOP-IT0A8CI running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim -rename_top instruction_memory_ip -prefix
-//               instruction_memory_ip_ instruction_memory_ip_sim_netlist.v
+// Date        : Mon Sep  9 21:39:29 2019
+// Host        : SpencerNUC running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode funcsim
+//               C:/Users/Spencer/Documents/Vivado/single-cycle-cpu/single-cycle-cpu.srcs/sources_1/ip/instruction_memory_ip/instruction_memory_ip_sim_netlist.v
 // Design      : instruction_memory_ip
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -88,7 +88,7 @@ endmodule
 (* C_MEM_INIT_FILE = "instruction_memory_ip.mif" *) (* C_MEM_TYPE = "0" *) (* C_PARSER_TYPE = "1" *) 
 (* C_PIPELINE_STAGES = "0" *) (* C_QCE_JOINED = "0" *) (* C_QUALIFY_WE = "0" *) 
 (* C_READ_MIF = "1" *) (* C_REG_A_D_INPUTS = "0" *) (* C_REG_DPRA_INPUT = "0" *) 
-(* C_SYNC_ENABLE = "1" *) (* C_WIDTH = "32" *) 
+(* C_SYNC_ENABLE = "1" *) (* C_WIDTH = "32" *) (* ORIG_REF_NAME = "dist_mem_gen_v8_0_11" *) 
 module instruction_memory_ip_dist_mem_gen_v8_0_11
    (a,
     d,
@@ -264,6 +264,7 @@ module instruction_memory_ip_dist_mem_gen_v8_0_11
         .spo({\^spo [31],\^spo [27],\^spo [20]}));
 endmodule
 
+(* ORIG_REF_NAME = "dist_mem_gen_v8_0_11_synth" *) 
 module instruction_memory_ip_dist_mem_gen_v8_0_11_synth
    (spo,
     a);
@@ -278,6 +279,7 @@ module instruction_memory_ip_dist_mem_gen_v8_0_11_synth
         .spo(spo));
 endmodule
 
+(* ORIG_REF_NAME = "rom" *) 
 module instruction_memory_ip_rom
    (spo,
     a);
