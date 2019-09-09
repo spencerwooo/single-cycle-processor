@@ -13,7 +13,7 @@ All source codes are available at [single-cycle-cpu.srcs](./single-cycle-cpu.src
 - [Design Sources](./single-cycle-cpu.srcs/sources_1/new)
 - [Simulation Sources](./single-cycle-cpu.srcs/sim_1/new)
 
-Instruction, data memory and register files are initialized at [single-cycle-cpu.tbcode](./single-cycle-cpu.tbcode).
+Instruction, data memory and register files are initialized at [tests](./tests).
 
 ## Modules / Data Path
 
