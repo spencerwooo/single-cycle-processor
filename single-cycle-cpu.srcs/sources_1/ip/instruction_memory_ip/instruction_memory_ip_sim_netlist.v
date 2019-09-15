@@ -227,7 +227,6 @@ module instruction_memory_ip_dist_mem_gen_v8_0_11
   assign qspo[0] = \<const0> ;
   assign spo[31] = \^spo [31];
   assign spo[30] = \<const0> ;
-<<<<<<< HEAD
   assign spo[29:26] = \^spo [29:26];
   assign spo[25] = \<const0> ;
   assign spo[24] = \<const0> ;
@@ -242,59 +241,22 @@ module instruction_memory_ip_dist_mem_gen_v8_0_11
   assign spo[10] = \<const0> ;
   assign spo[9] = \<const0> ;
   assign spo[8:0] = \^spo [8:0];
-=======
-  assign spo[29:27] = \^spo [29:27];
-  assign spo[26] = \^spo [29];
-  assign spo[25] = \<const0> ;
-  assign spo[24] = \<const0> ;
-  assign spo[23] = \<const0> ;
-  assign spo[22:21] = \^spo [22:21];
-  assign spo[20] = \<const0> ;
-  assign spo[19] = \<const0> ;
-  assign spo[18] = \^spo [27];
-  assign spo[17:16] = \^spo [17:16];
-  assign spo[15] = \<const0> ;
-  assign spo[14] = \<const0> ;
-  assign spo[13] = \<const0> ;
-  assign spo[12] = \^spo [12];
-  assign spo[11] = \^spo [12];
-  assign spo[10] = \<const0> ;
-  assign spo[9] = \<const0> ;
-  assign spo[8] = \<const0> ;
-  assign spo[7] = \<const0> ;
-  assign spo[6] = \<const0> ;
-  assign spo[5] = \^spo [12];
-  assign spo[4] = \<const0> ;
-  assign spo[3:0] = \^spo [3:0];
->>>>>>> 2bbec7ac3b43bfda8c4ff9bc02f6741e3fe0acd4
   GND GND
        (.G(\<const0> ));
   instruction_memory_ip_dist_mem_gen_v8_0_11_synth \synth_options.dist_mem_inst 
        (.a(a),
-<<<<<<< HEAD
         .spo({\^spo [31],\^spo [29:26],\^spo [23:21],\^spo [19:16],\^spo [13],\^spo [8:0]}));
-=======
-        .spo({\^spo [31],\^spo [29:27],\^spo [22:21],\^spo [17:16],\^spo [12],\^spo [3:0]}));
->>>>>>> 2bbec7ac3b43bfda8c4ff9bc02f6741e3fe0acd4
 endmodule
 
 (* ORIG_REF_NAME = "dist_mem_gen_v8_0_11_synth" *) 
 module instruction_memory_ip_dist_mem_gen_v8_0_11_synth
    (spo,
     a);
-<<<<<<< HEAD
   output [21:0]spo;
   input [9:0]a;
 
   wire [9:0]a;
   wire [21:0]spo;
-=======
-  output [12:0]spo;
-  input [9:0]a;
-
-  wire [9:0]a;
-  wire [12:0]spo;
->>>>>>> 2bbec7ac3b43bfda8c4ff9bc02f6741e3fe0acd4
 
   instruction_memory_ip_rom \gen_rom.rom_inst 
        (.a(a),
@@ -305,24 +267,15 @@ endmodule
 module instruction_memory_ip_rom
    (spo,
     a);
-<<<<<<< HEAD
   output [21:0]spo;
   input [9:0]a;
 
   wire [9:0]a;
   wire [21:0]spo;
-=======
-  output [12:0]spo;
-  input [9:0]a;
-
-  wire [9:0]a;
-  wire [12:0]spo;
->>>>>>> 2bbec7ac3b43bfda8c4ff9bc02f6741e3fe0acd4
   wire \spo[31]_INST_0_i_1_n_0 ;
 
   (* SOFT_HLUTNM = "soft_lutpair4" *) 
   LUT5 #(
-<<<<<<< HEAD
     .INIT(32'h03003400)) 
     \spo[0]_INST_0 
        (.I0(a[0]),
@@ -479,113 +432,6 @@ module instruction_memory_ip_rom
         .I3(a[0]),
         .I4(a[1]),
         .O(spo[21]));
-=======
-    .INIT(32'h0000E700)) 
-    \spo[0]_INST_0 
-       (.I0(a[2]),
-        .I1(a[1]),
-        .I2(a[0]),
-        .I3(\spo[31]_INST_0_i_1_n_0 ),
-        .I4(a[3]),
-        .O(spo[0]));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT5 #(
-    .INIT(32'h01DB0000)) 
-    \spo[16]_INST_0 
-       (.I0(a[2]),
-        .I1(a[0]),
-        .I2(a[1]),
-        .I3(a[3]),
-        .I4(\spo[31]_INST_0_i_1_n_0 ),
-        .O(spo[5]));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT5 #(
-    .INIT(32'h0100E400)) 
-    \spo[17]_INST_0 
-       (.I0(a[2]),
-        .I1(a[0]),
-        .I2(a[1]),
-        .I3(\spo[31]_INST_0_i_1_n_0 ),
-        .I4(a[3]),
-        .O(spo[6]));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
-  LUT5 #(
-    .INIT(32'h20002060)) 
-    \spo[18]_INST_0 
-       (.I0(a[2]),
-        .I1(a[3]),
-        .I2(\spo[31]_INST_0_i_1_n_0 ),
-        .I3(a[1]),
-        .I4(a[0]),
-        .O(spo[9]));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT5 #(
-    .INIT(32'h20003000)) 
-    \spo[1]_INST_0 
-       (.I0(a[2]),
-        .I1(a[3]),
-        .I2(\spo[31]_INST_0_i_1_n_0 ),
-        .I3(a[1]),
-        .I4(a[0]),
-        .O(spo[1]));
-  (* SOFT_HLUTNM = "soft_lutpair5" *) 
-  LUT5 #(
-    .INIT(32'h00200000)) 
-    \spo[21]_INST_0 
-       (.I0(a[0]),
-        .I1(a[1]),
-        .I2(\spo[31]_INST_0_i_1_n_0 ),
-        .I3(a[3]),
-        .I4(a[2]),
-        .O(spo[7]));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
-  LUT5 #(
-    .INIT(32'h00201000)) 
-    \spo[22]_INST_0 
-       (.I0(a[2]),
-        .I1(a[3]),
-        .I2(\spo[31]_INST_0_i_1_n_0 ),
-        .I3(a[1]),
-        .I4(a[0]),
-        .O(spo[8]));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT5 #(
-    .INIT(32'h32001700)) 
-    \spo[26]_INST_0 
-       (.I0(a[2]),
-        .I1(a[3]),
-        .I2(a[0]),
-        .I3(\spo[31]_INST_0_i_1_n_0 ),
-        .I4(a[1]),
-        .O(spo[11]));
-  LUT3 #(
-    .INIT(8'h40)) 
-    \spo[28]_INST_0 
-       (.I0(a[3]),
-        .I1(\spo[31]_INST_0_i_1_n_0 ),
-        .I2(a[2]),
-        .O(spo[10]));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT5 #(
-    .INIT(32'h0000E300)) 
-    \spo[2]_INST_0 
-       (.I0(a[2]),
-        .I1(a[0]),
-        .I2(a[1]),
-        .I3(\spo[31]_INST_0_i_1_n_0 ),
-        .I4(a[3]),
-        .O(spo[2]));
-  (* SOFT_HLUTNM = "soft_lutpair5" *) 
-  LUT5 #(
-    .INIT(32'h00001000)) 
-    \spo[31]_INST_0 
-       (.I0(a[0]),
-        .I1(a[1]),
-        .I2(\spo[31]_INST_0_i_1_n_0 ),
-        .I3(a[3]),
-        .I4(a[2]),
-        .O(spo[12]));
->>>>>>> 2bbec7ac3b43bfda8c4ff9bc02f6741e3fe0acd4
   LUT6 #(
     .INIT(64'h0000000000000001)) 
     \spo[31]_INST_0_i_1 
@@ -596,7 +442,6 @@ module instruction_memory_ip_rom
         .I4(a[5]),
         .I5(a[7]),
         .O(\spo[31]_INST_0_i_1_n_0 ));
-<<<<<<< HEAD
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT5 #(
     .INIT(32'h00400000)) 
@@ -653,28 +498,6 @@ module instruction_memory_ip_rom
         .I2(a[3]),
         .I3(a[1]),
         .O(spo[8]));
-=======
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
-  LUT5 #(
-    .INIT(32'h00000020)) 
-    \spo[3]_INST_0 
-       (.I0(a[0]),
-        .I1(a[1]),
-        .I2(\spo[31]_INST_0_i_1_n_0 ),
-        .I3(a[3]),
-        .I4(a[2]),
-        .O(spo[3]));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
-  LUT5 #(
-    .INIT(32'h00000040)) 
-    \spo[5]_INST_0 
-       (.I0(a[0]),
-        .I1(a[1]),
-        .I2(\spo[31]_INST_0_i_1_n_0 ),
-        .I3(a[3]),
-        .I4(a[2]),
-        .O(spo[4]));
->>>>>>> 2bbec7ac3b43bfda8c4ff9bc02f6741e3fe0acd4
 endmodule
 `ifndef GLBL
 `define GLBL
