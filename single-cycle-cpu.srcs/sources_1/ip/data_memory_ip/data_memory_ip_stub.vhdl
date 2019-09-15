@@ -1,10 +1,10 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
--- Date        : Sun Sep 15 15:45:22 2019
+-- Date        : Sun Sep 15 15:45:21 2019
 -- Host        : DESKTOP-IT0A8CI running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               C:/Users/Spencer/Documents/github/single-cycle-processor/single-cycle-cpu.srcs/sources_1/ip/data_memory_ip/data_memory_ip_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top data_memory_ip -prefix
+--               data_memory_ip_ data_memory_ip_stub.vhdl
 -- Design      : data_memory_ip
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a35tcsg324-1

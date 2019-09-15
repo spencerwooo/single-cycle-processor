@@ -1,10 +1,10 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
--- Date        : Sun Sep 15 15:45:22 2019
+-- Date        : Sun Sep 15 15:45:21 2019
 -- Host        : DESKTOP-IT0A8CI running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               C:/Users/Spencer/Documents/github/single-cycle-processor/single-cycle-cpu.srcs/sources_1/ip/data_memory_ip/data_memory_ip_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top data_memory_ip -prefix
+--               data_memory_ip_ data_memory_ip_sim_netlist.vhdl
 -- Design      : data_memory_ip
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -22,8 +22,6 @@ entity data_memory_ip_spram is
     a : in STD_LOGIC_VECTOR ( 9 downto 0 );
     we : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of data_memory_ip_spram : entity is "spram";
 end data_memory_ip_spram;
 
 architecture STRUCTURE of data_memory_ip_spram is
@@ -2589,8 +2587,6 @@ entity data_memory_ip_dist_mem_gen_v8_0_11_synth is
     a : in STD_LOGIC_VECTOR ( 9 downto 0 );
     we : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of data_memory_ip_dist_mem_gen_v8_0_11_synth : entity is "dist_mem_gen_v8_0_11_synth";
 end data_memory_ip_dist_mem_gen_v8_0_11_synth;
 
 architecture STRUCTURE of data_memory_ip_dist_mem_gen_v8_0_11_synth is
@@ -2692,8 +2688,6 @@ entity data_memory_ip_dist_mem_gen_v8_0_11 is
   attribute C_SYNC_ENABLE of data_memory_ip_dist_mem_gen_v8_0_11 : entity is 1;
   attribute C_WIDTH : integer;
   attribute C_WIDTH of data_memory_ip_dist_mem_gen_v8_0_11 : entity is 32;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of data_memory_ip_dist_mem_gen_v8_0_11 : entity is "dist_mem_gen_v8_0_11";
 end data_memory_ip_dist_mem_gen_v8_0_11;
 
 architecture STRUCTURE of data_memory_ip_dist_mem_gen_v8_0_11 is
