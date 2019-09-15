@@ -1,10 +1,10 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
-// Date        : Mon Sep  9 21:39:29 2019
-// Host        : SpencerNUC running 64-bit major release  (build 9200)
+// Date        : Sun Sep 15 15:45:22 2019
+// Host        : DESKTOP-IT0A8CI running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
-//               C:/Users/Spencer/Documents/Vivado/single-cycle-cpu/single-cycle-cpu.srcs/sources_1/ip/data_memory_ip/data_memory_ip_sim_netlist.v
+//               C:/Users/Spencer/Documents/github/single-cycle-processor/single-cycle-cpu.srcs/sources_1/ip/data_memory_ip/data_memory_ip_sim_netlist.v
 // Design      : data_memory_ip
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -748,7 +748,7 @@ module data_memory_ip_spram
         .R(1'b0));
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-5 {cell *THIS*}}" *) 
   RAM256X1S #(
-    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000007)) 
+    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000000)) 
     ram_reg_0_255_0_0
        (.A(a[7:0]),
         .D(d[0]),
@@ -854,7 +854,7 @@ module data_memory_ip_spram
         .WE(ram_reg_0_255_0_0_i_1_n_0));
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-5 {cell *THIS*}}" *) 
   RAM256X1S #(
-    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000006)) 
+    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000000)) 
     ram_reg_0_255_1_1
        (.A(a[7:0]),
         .D(d[1]),
@@ -953,7 +953,7 @@ module data_memory_ip_spram
         .WE(ram_reg_0_255_0_0_i_1_n_0));
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-5 {cell *THIS*}}" *) 
   RAM256X1S #(
-    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000006)) 
+    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000000)) 
     ram_reg_0_255_2_2
        (.A(a[7:0]),
         .D(d[2]),
@@ -980,7 +980,7 @@ module data_memory_ip_spram
         .WE(ram_reg_0_255_0_0_i_1_n_0));
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-5 {cell *THIS*}}" *) 
   RAM256X1S #(
-    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000004)) 
+    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000000)) 
     ram_reg_0_255_3_3
        (.A(a[7:0]),
         .D(d[3]),
@@ -989,7 +989,7 @@ module data_memory_ip_spram
         .WE(ram_reg_0_255_0_0_i_1_n_0));
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-5 {cell *THIS*}}" *) 
   RAM256X1S #(
-    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000002)) 
+    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000000)) 
     ram_reg_0_255_4_4
        (.A(a[7:0]),
         .D(d[4]),
@@ -998,7 +998,7 @@ module data_memory_ip_spram
         .WE(ram_reg_0_255_0_0_i_1_n_0));
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-5 {cell *THIS*}}" *) 
   RAM256X1S #(
-    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000002)) 
+    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000000)) 
     ram_reg_0_255_5_5
        (.A(a[7:0]),
         .D(d[5]),
@@ -1007,7 +1007,7 @@ module data_memory_ip_spram
         .WE(ram_reg_0_255_0_0_i_1_n_0));
   (* METHODOLOGY_DRC_VIOS = "{SYNTH-5 {cell *THIS*}}" *) 
   RAM256X1S #(
-    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000002)) 
+    .INIT(256'h0000000000000000000000000000000000000000000000000000000000000000)) 
     ram_reg_0_255_6_6
        (.A(a[7:0]),
         .D(d[6]),
